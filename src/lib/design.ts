@@ -8,6 +8,8 @@ export const design = {
   },
   layout: {
     contentWidth: 600,
+    /** Requested from the image optimizer (2× content width for retina). */
+    imageSrcWidth: 1200,
     /** Tailwind `md` — adjust mobile values in `spacing` below */
     breakpoint: "500px",
   },

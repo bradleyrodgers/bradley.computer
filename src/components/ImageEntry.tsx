@@ -12,18 +12,19 @@ export function ImageEntry({ entry }: { entry: ImageEntryType }) {
     color: design.colors.foreground,
   };
 
+  const { contentWidth, imageSrcWidth } = design.layout;
+
   return (
     <article className="w-full">
-      <div className="relative aspect-square w-full">
-        <Image
-          src={entry.imageSrc}
-          alt={entry.imageAlt}
-          fill
-          className="object-cover"
-          sizes={`(max-width: ${design.layout.contentWidth}px) 100vw, ${design.layout.contentWidth}px`}
-          priority
-        />
-      </div>
+      <Image
+        src={entry.imageSrc}
+        alt={entry.imageAlt}
+        width={imageSrcWidth}
+        height={imageSrcWidth}
+        sizes={`${contentWidth}px`}
+        className="h-auto w-full"
+        quality={90}
+      />
       <div className={`${design.spacing.caption.mt} space-y-1`}>
         {entry.titleHref ? (
           <a
