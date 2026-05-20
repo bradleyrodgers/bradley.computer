@@ -1,3 +1,4 @@
+import { EntryDate } from "@/components/EntryDate";
 import { design } from "@/lib/design";
 import type { BandcampEntry as BandcampEntryType } from "@/lib/entries";
 
@@ -18,12 +19,9 @@ export function BandcampEntry({ entry }: { entry: BandcampEntryType }) {
         allow="autoplay"
         loading="lazy"
       />
-      <p
-        className={design.spacing.caption.mt}
-        style={{ ...design.typography.caption, color: design.colors.muted }}
-      >
-        {entry.date}
-      </p>
+      <div className={design.spacing.caption.mt}>
+        <EntryDate publishedAt={entry.publishedAt} />
+      </div>
     </article>
   );
 }

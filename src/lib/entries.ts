@@ -5,14 +5,15 @@ export type ImageEntry = {
   imageAlt: string;
   title: string;
   titleHref?: string;
-  date: string;
+  /** ISO 8601 datetime; only the local calendar date is shown. */
+  publishedAt: string;
 };
 
 export type BandcampEntry = {
   type: "bandcamp";
   id: string;
   trackId: number;
-  date: string;
+  publishedAt: string;
 };
 
 export type YouTubeEntry = {
@@ -20,7 +21,7 @@ export type YouTubeEntry = {
   id: string;
   videoId: string;
   title: string;
-  date: string;
+  publishedAt: string;
 };
 
 export type FeedEntry = ImageEntry | BandcampEntry | YouTubeEntry;
@@ -34,19 +35,19 @@ export const entries: FeedEntry[] = [
     imageAlt: "make software",
     title: "History of Software",
     titleHref: "https://historyofsoftware.org/",
-    date: "Wed 20 May",
+    publishedAt: "2026-05-20T10:00:00-04:00",
   },
   {
     type: "bandcamp",
     id: "every-time-the-sun-comes-up",
     trackId: 3957424062,
-    date: "Wed 20 May",
+    publishedAt: "2026-05-20T14:30:00-04:00",
   },
   {
     type: "youtube",
     id: "6lkS-MCenXI",
     videoId: "6lkS-MCenXI",
     title: "YouTube video",
-    date: "Wed 20 May",
+    publishedAt: "2026-05-20T18:00:00-04:00",
   },
 ];

@@ -1,3 +1,4 @@
+import { EntryDate } from "@/components/EntryDate";
 import { design } from "@/lib/design";
 import type { YouTubeEntry as YouTubeEntryType } from "@/lib/entries";
 
@@ -16,12 +17,9 @@ export function YouTubeEntry({ entry }: { entry: YouTubeEntryType }) {
           loading="lazy"
         />
       </div>
-      <p
-        className={design.spacing.caption.mt}
-        style={{ ...design.typography.caption, color: design.colors.muted }}
-      >
-        {entry.date}
-      </p>
+      <div className={design.spacing.caption.mt}>
+        <EntryDate publishedAt={entry.publishedAt} />
+      </div>
     </article>
   );
 }

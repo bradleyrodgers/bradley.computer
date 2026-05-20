@@ -13,7 +13,7 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Add journal entries
 
-Edit `src/lib/entries.ts`. Two entry types are supported:
+Edit `src/lib/entries.ts`. Each entry has a `publishedAt` ISO datetime (time is not shown; the local calendar date is derived from it). Supported types:
 
 - **image** — square image, title, and date (`imageSrc` under `public/`)
 - **youtube** — embedded video (`videoId` from the watch URL)

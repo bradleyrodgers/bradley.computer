@@ -1,3 +1,4 @@
+import { EntryDate } from "@/components/EntryDate";
 import Image from "next/image";
 import { design } from "@/lib/design";
 import type { ImageEntry as ImageEntryType } from "@/lib/entries";
@@ -37,9 +38,7 @@ export function ImageEntry({ entry }: { entry: ImageEntryType }) {
         ) : (
           <p style={captionTextStyle}>{entry.title}</p>
         )}
-        <p style={{ ...design.typography.caption, color: design.colors.muted }}>
-          {entry.date}
-        </p>
+        <EntryDate publishedAt={entry.publishedAt} />
       </div>
     </article>
   );
