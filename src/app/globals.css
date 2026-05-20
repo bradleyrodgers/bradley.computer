@@ -1,12 +1,5 @@
 @import "tailwindcss";
 
-:root {
-  --background: #F7F7F4;
-  --foreground: #504F4A;
-  --muted: #B8B8B4;
-  --accent: #0104eb;
-}
-
 @theme inline {
   --breakpoint-md: 500px;
   --color-background: var(--background);

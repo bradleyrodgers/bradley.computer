@@ -3,7 +3,7 @@ export const design = {
     background: "#F7F7F4",
     foreground: "#504F4A",
     muted: "#B8B8B4",
-    accent: "#0104eb",
+    accent: "#B8B881",
     white: "#ffffff",
   },
   layout: {

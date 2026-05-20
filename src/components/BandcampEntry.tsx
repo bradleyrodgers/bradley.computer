@@ -7,8 +7,8 @@ function hexForEmbed(color: string) {
 }
 
 export function BandcampEntry({ entry }: { entry: BandcampEntryType }) {
-  const { background, accent } = design.colors;
-  const src = `https://bandcamp.com/EmbeddedPlayer/track=${entry.trackId}/size=large/bgcol=${hexForEmbed(background)}/linkcol=${hexForEmbed(accent)}/tracklist=false/artwork=small/transparent=true/`;
+  const { background, foreground } = design.colors;
+  const src = `https://bandcamp.com/EmbeddedPlayer/track=${entry.trackId}/size=large/bgcol=${hexForEmbed(background)}/linkcol=${hexForEmbed(foreground)}/tracklist=false/artwork=small/transparent=true/`;
 
   return (
     <article className="w-full">
