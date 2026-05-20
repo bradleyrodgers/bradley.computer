@@ -13,7 +13,7 @@ export function BandcampEntry({ entry }: { entry: BandcampEntryType }) {
   return (
     <article className="w-full">
       <iframe
-        title="Every Time the Sun Comes Up (Alternate Version) — Sharon Van Etten"
+        title={entry.title}
         src={src}
         className="h-[120px] w-full border-0"
         allow="autoplay"

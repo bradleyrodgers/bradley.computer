@@ -42,6 +42,11 @@ export const design = {
       lineHeight: "20px",
       fontWeight: 500,
     },
+    subheader: {
+      fontSize: "16px",
+      lineHeight: "20px",
+      fontWeight: 400,
+    },
     caption: {
       fontSize: "14px",
       lineHeight: "20px",

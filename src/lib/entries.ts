@@ -13,6 +13,7 @@ export type BandcampEntry = {
   type: "bandcamp";
   id: string;
   trackId: number;
+  title: string;
   publishedAt: string;
 };
 
@@ -28,6 +29,31 @@ export type FeedEntry = ImageEntry | BandcampEntry | YouTubeEntry;
 
 /** Content from the Figma Desktop frame. */
 export const entries: FeedEntry[] = [
+  {
+    type: "bandcamp",
+    id: "cobwebs",
+    trackId: 1515978283,
+    title: "Cobwebs — Mildred",
+    publishedAt: "2026-05-20T15:18:44+10:00",
+  },
+  {
+    type: "image",
+    id: "office-blommen",
+    imageSrc: "/entries/office-blommen.jpg",
+    imageAlt: "Office Blommen",
+    title: "Office Blommen",
+    titleHref: "https://www.instagram.com/officeblommen/",
+    publishedAt: "2026-05-20T15:17:01+10:00",
+  },
+  {
+    type: "image",
+    id: "cd-co",
+    imageSrc: "/entries/cd-co.png",
+    imageAlt: "Christopher Doyle & Co",
+    title: "Christopher Doyle & Co",
+    titleHref: "https://christopherdoyle.co",
+    publishedAt: "2026-05-20T15:14:01+10:00",
+  },
   {
     type: "image",
     id: "history-of-software",
@@ -50,6 +76,7 @@ export const entries: FeedEntry[] = [
     type: "bandcamp",
     id: "every-time-the-sun-comes-up",
     trackId: 3957424062,
+    title: "Every Time the Sun Comes Up (Alternate Version) — Sharon Van Etten",
     publishedAt: "2026-02-09T17:00:00+11:00",
   },
   {
