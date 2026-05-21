@@ -7,7 +7,7 @@ export function SiteHeader() {
         Bradley Rodgers
       </h1>
       <h2 style={{ color: design.colors.muted, ...design.typography.subheader }}>
-        Inspiration Journal
+        Audio Visual Journal
       </h2>
 
     </header>
