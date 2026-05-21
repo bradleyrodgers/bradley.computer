@@ -5,7 +5,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Bradley Rodgers",
-  description: "An inspiration journal by Bradley Rodgers.",
+  description: "An audio visual journal by Bradley Rodgers.",
 };
 
 export default function RootLayout({
