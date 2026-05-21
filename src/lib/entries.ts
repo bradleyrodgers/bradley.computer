@@ -30,6 +30,16 @@ export type FeedEntry = ImageEntry | BandcampEntry | YouTubeEntry;
 /** Content from the Figma Desktop frame. */
 export const entries: FeedEntry[] = [
   {
+    type: "image",
+    id: "stout-books",
+    imageSrc: "/entries/stout-books.webp",
+    imageAlt: "An afternoon at Stout Books",
+    title: "An afternoon at Stout Books",
+    titleHref:
+      "https://www.drakes.com/blogs/news/an-afternoon-at-stout-books",
+    publishedAt: "2026-05-21T23:57:08+10:00",
+  },
+  {
     type: "bandcamp",
     id: "cobwebs",
     trackId: 1515978283,
