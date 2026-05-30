@@ -31,6 +31,15 @@ export type FeedEntry = ImageEntry | BandcampEntry | YouTubeEntry;
 export const entries: FeedEntry[] = [
   {
     type: "image",
+    id: "benjamin-edgar",
+    imageSrc: "/entries/benjamin-edgar.jpg",
+    imageAlt: "Brown Switzerland Chicago sweatshirt hanging in a studio",
+    title: "Benjamin Edgar",
+    titleHref: "https://www.benjaminedgar.com/",
+    publishedAt: "2026-05-30T20:28:39+10:00",
+  },
+  {
+    type: "image",
     id: "jazmine-joye",
     imageSrc: "/entries/jazmine-joye.jpg",
     imageAlt: "Illustration of a dark pint beside oysters on a plate",
