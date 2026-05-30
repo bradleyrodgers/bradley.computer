@@ -2,14 +2,17 @@
 
 import { design } from "@/lib/design";
 import { formatEntryDate } from "@/lib/format-date";
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
+
+const subscribe = () => () => {};
+const getServerSnapshot = () => null;
 
 export function EntryDate({ publishedAt }: { publishedAt: string }) {
-  const [label, setLabel] = useState<string | null>(null);
-
-  useEffect(() => {
-    setLabel(formatEntryDate(publishedAt));
-  }, [publishedAt]);
+  const label = useSyncExternalStore(
+    subscribe,
+    () => formatEntryDate(publishedAt),
+    getServerSnapshot,
+  );
 
   return (
     <p

@@ -31,6 +31,15 @@ export type FeedEntry = ImageEntry | BandcampEntry | YouTubeEntry;
 export const entries: FeedEntry[] = [
   {
     type: "image",
+    id: "jazmine-joye",
+    imageSrc: "/entries/jazmine-joye.jpg",
+    imageAlt: "Illustration of a dark pint beside oysters on a plate",
+    title: "Jazmine Joye",
+    titleHref: "https://www.instagram.com/jazmine.joye/",
+    publishedAt: "2026-05-30T20:12:30+10:00",
+  },
+  {
+    type: "image",
     id: "stout-books",
     imageSrc: "/entries/stout-books.webp",
     imageAlt: "An afternoon at Stout Books",
