@@ -30,6 +30,13 @@ export type FeedEntry = ImageEntry | BandcampEntry | YouTubeEntry;
 /** Content from the Figma Desktop frame. */
 export const entries: FeedEntry[] = [
   {
+    type: "youtube",
+    id: "WgpKEMAfU_U",
+    videoId: "WgpKEMAfU_U",
+    title: "EDDY CURRENT SUPPRESSION RING - SWIMMING HOLE",
+    publishedAt: "2026-05-30T20:49:23+10:00",
+  },
+  {
     type: "image",
     id: "benjamin-edgar",
     imageSrc: "/entries/benjamin-edgar.jpg",
