@@ -1,0 +1,4 @@
+interface:
+  display_name: "Add Journal Post"
+  short_description: "Add image and YouTube posts to bradley.computer."
+  default_prompt: "Add a new post to the bradley.computer journal feed."
