@@ -26,10 +26,7 @@ export function VinylCollection({ records }: { records: VinylRecord[] }) {
 
   return (
     <div>
-      <div
-        className="mb-8 flex flex-wrap items-center justify-between gap-4 border-b pb-4"
-        style={{ borderColor: design.colors.muted }}
-      >
+      <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
         <div className="flex items-center gap-4">
           {views.map((option) => {
             const active = view === option.value;
@@ -38,14 +35,11 @@ export function VinylCollection({ records }: { records: VinylRecord[] }) {
                 key={option.value}
                 type="button"
                 onClick={() => setView(option.value)}
-                className="transition-colors"
+                className={`transition-colors hover:text-foreground ${
+                  active ? "text-foreground" : "text-muted"
+                }`}
                 aria-pressed={active}
-                style={{
-                  ...design.typography.caption,
-                  color: active
-                    ? design.colors.accent
-                    : design.colors.foreground,
-                }}
+                style={{ ...design.typography.caption, fontWeight: 500 }}
               >
                 {option.label}
               </button>
@@ -53,30 +47,19 @@ export function VinylCollection({ records }: { records: VinylRecord[] }) {
           })}
         </div>
 
-        <label
-          className="flex items-center gap-2"
-          style={{
-            ...design.typography.caption,
-            color: design.colors.muted,
-          }}
+        <select
+          value={sort}
+          onChange={(event) => setSort(event.target.value as SortKey)}
+          className="cursor-pointer bg-transparent text-muted outline-none transition-colors hover:text-foreground"
+          aria-label="Sort by"
+          style={{ ...design.typography.caption, fontWeight: 500 }}
         >
-          Sort by
-          <select
-            value={sort}
-            onChange={(event) => setSort(event.target.value as SortKey)}
-            className="cursor-pointer bg-transparent outline-none"
-            style={{
-              ...design.typography.caption,
-              color: design.colors.foreground,
-            }}
-          >
-            {sortOptions.map((option) => (
-              <option key={option.key} value={option.key}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        </label>
+          {sortOptions.map((option) => (
+            <option key={option.key} value={option.key}>
+              {option.label}
+            </option>
+          ))}
+        </select>
       </div>
 
       {view === "grid" ? (
