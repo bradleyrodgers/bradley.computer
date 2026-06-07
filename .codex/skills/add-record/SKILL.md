@@ -1,0 +1,151 @@
+---
+name: add-record
+description: Add a record to the bradley.computer record collection from a natural-language message. Use when the user says they got, bought, picked up, or wants to add a record/album/vinyl (e.g. "I got the new Kevin Morby album yesterday"). Resolves the album on MusicBrainz, creates the Obsidian vault note with pinned cover-art metadata, runs the sync to fetch the cover, then summarizes for confirmation before committing and pushing.
+---
+
+# Add Record to Collection
+
+## Overview
+
+The Obsidian vault is the single source of truth. Adding a record means: create one
+markdown note in the vault, run the sync script to regenerate `src/lib/vinyl-data.ts`
+and download cover art, then commit/push the repo changes — but only after the user
+confirms the summary.
+
+## Paths
+
+- Repo: `/Users/bradley/Projects/bradley.computer`
+- Vault Music folder: `/Users/bradley/Documents/Obsidian Vault/Music` (override with `VINYL_VAULT_DIR`)
+- Note file: `<Album Title>.md` — the filename IS the album title shown on the site
+- Generated data: `src/lib/vinyl-data.ts` (auto-generated; never hand-edit)
+- Cover images: `public/vinyl/<slug>.jpg` (existing covers are never overwritten)
+- Public route: `/records`
+
+## Note frontmatter
+
+```markdown
+---
+Artist: Kevin Morby
+Release Year: 2022
+Purchased Year: 2026
+Purchased Month: 6
+Purchased Day: 6
+MusicBrainz: https://musicbrainz.org/release-group/<uuid>
+---
+```
+
+- All fields are optional except `Artist`. Leave a field blank (key with empty value) when unknown.
+- `MusicBrainz` should be a **release-group** URL — pin it so the sync fetches the correct cover.
+- Purchased date is partial-friendly: year only, year+month, or full date. A day without a month is ignored.
+
+## Workflow
+
+Copy this checklist and track progress:
+
+```
+- [ ] 1. Parse the message (artist, album, purchase date)
+- [ ] 2. Resolve the album on MusicBrainz (release-group MBID + release year)
+- [ ] 3. Confirm the match if anything is ambiguous
+- [ ] 4. Create the vault note
+- [ ] 5. Run npm run sync-vinyl
+- [ ] 6. Verify cover + data entry
+- [ ] 7. Summarize and ask for confirmation
+- [ ] 8. On approval: commit and push
+```
+
+### 1. Parse the message
+
+- **Artist** and **album**. If the user says "the new/latest album" without a title, resolve the most recent studio album in step 2.
+- **Purchase date**: convert relative words against today's date. "today" → today; "yesterday" → today − 1; "last week" → roughly 7 days ago (month precision is fine); a month/season → year+month; nothing said → leave purchased fields blank.
+
+### 2. Resolve on MusicBrainz
+
+Always send a descriptive User-Agent and pause ~1s between calls (rate limit). Use curl:
+
+```bash
+UA="bradley.computer-vinyl/1.0 ( https://bradley.computer )"
+```
+
+**Find the artist MBID:**
+
+```bash
+curl -fsS -A "$UA" -H "Accept: application/json" \
+  'https://musicbrainz.org/ws/2/artist/?query=artist:%22Kevin%20Morby%22&fmt=json&limit=5'
+```
+
+Pick the best-scoring artist (check `country`/`disambiguation` if multiple).
+
+**For a specific titled album** — search release-groups directly:
+
+```bash
+curl -fsS -A "$UA" -H "Accept: application/json" \
+  'https://musicbrainz.org/ws/2/release-group/?query=artist:%22Kevin%20Morby%22%20AND%20releasegroup:%22This%20Is%20a%20Photograph%22&fmt=json&limit=5'
+```
+
+**For "the new/latest album"** — browse the artist's release-groups and pick the newest studio album:
+
+```bash
+curl -fsS -A "$UA" -H "Accept: application/json" \
+  'https://musicbrainz.org/ws/2/release-group?artist=<ARTIST_MBID>&type=album&fmt=json&limit=100'
+```
+
+From the results, keep only `primary-type: "Album"` with **no** `secondary-types`
+(exclude Live, Compilation, EP, Single, Soundtrack, Remix). Sort by
+`first-release-date` descending and take the first.
+
+From the chosen release-group capture:
+- `id` → build `MusicBrainz: https://musicbrainz.org/release-group/<id>`
+- `first-release-date` → `Release Year` (first 4 chars)
+- `title` → the album title (use this canonical casing for the filename)
+
+### 3. Confirm ambiguity
+
+If the artist or album match is uncertain (multiple plausible hits, low score, or you
+inferred "latest"), state the chosen artist + album + year and ask the user to confirm
+before writing files.
+
+### 4. Create the vault note
+
+Write `/Users/bradley/Documents/Obsidian Vault/Music/<Album Title>.md` with the frontmatter
+above. Use the canonical title as the filename verbatim (keep characters like `&`, `'`).
+If the note already exists, stop and tell the user instead of overwriting.
+
+### 5. Run the sync
+
+```bash
+cd /Users/bradley/Projects/bradley.computer && npm run sync-vinyl
+```
+
+This regenerates `src/lib/vinyl-data.ts` and downloads the cover to `public/vinyl/<slug>.jpg`
+using the pinned MusicBrainz release-group. Existing covers are kept.
+
+### 6. Verify
+
+- Confirm the new record appears in `src/lib/vinyl-data.ts` with the expected `releaseDate`.
+- Confirm `coverSrc` is `/vinyl/<slug>.jpg`, not `/vinyl/placeholder.svg`. If it's the
+  placeholder, the cover wasn't found — tell the user; they can drop a JPG at
+  `public/vinyl/<slug>.jpg` manually and re-run the sync.
+
+### 7. Summarize and confirm
+
+Present a short summary — artist, title, release year, purchase date, cover status — and
+ask the user to confirm before committing. Do not commit or push without approval.
+
+### 8. Commit and push (after approval)
+
+Stage only this record's changes — `src/lib/vinyl-data.ts` and the new cover under
+`public/vinyl/` — and avoid unrelated working-tree changes. The vault note lives outside
+the repo (it's the source of truth) and is not committed.
+
+```bash
+git add src/lib/vinyl-data.ts public/vinyl/<slug>.jpg
+git commit -m "Add <Artist> — <Album> to record collection"
+git push
+```
+
+## Notes
+
+- Internal code still uses `vinyl` identifiers (script `sync-vinyl`, `public/vinyl`,
+  `vinyl-data.ts`); only the public route/title were renamed to "records". Don't rename these.
+- If MusicBrainz/Cover Art Archive is unreachable, the sync falls back to curl automatically;
+  if it still fails, report it rather than committing a placeholder.
