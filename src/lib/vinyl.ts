@@ -13,8 +13,9 @@ export type VinylRecord = {
   coverAlt: string;
 };
 
-// Records are generated from the Obsidian vault by `npm run sync-vinyl`.
-// Edit the vault notes (or the cover images in public/vinyl), not vinyl-data.ts.
+// Records are generated from the Obsidian vault plus the repo-backed record
+// inbox by `npm run sync-vinyl`. Edit the vault/inbox notes (or the cover
+// images in public/vinyl), not vinyl-data.ts.
 export { records } from "./vinyl-data";
 
 export type SortKey = "releaseDate" | "artist";

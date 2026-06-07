@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "sync-vinyl": "node scripts/sync-vinyl.mjs"
+    "sync-vinyl": "node scripts/sync-vinyl.mjs",
+    "import-vinyl-inbox": "node scripts/import-vinyl-inbox.mjs"
   },
   "dependencies": {
     "geist": "^1.7.0",

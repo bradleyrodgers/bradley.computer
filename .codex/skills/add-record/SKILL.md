@@ -1,16 +1,17 @@
 ---
 name: add-record
-description: Add a record to the bradley.computer record collection from a natural-language message. Use when the user says they got, bought, picked up, or wants to add a record/album/vinyl (e.g. "I got the new Kevin Morby album yesterday"). Resolves the album on MusicBrainz, creates the Obsidian vault note with pinned cover-art metadata, runs the sync to fetch the cover, then summarizes for confirmation before committing and pushing.
+description: Add a record to the bradley.computer record collection from a natural-language message. Use when the user says they got, bought, picked up, or wants to add a record/album/vinyl (e.g. "I got the new Kevin Morby album yesterday"). Resolves the album on MusicBrainz, creates an Obsidian vault note when local or a repo-backed inbox note when the vault is unavailable, runs the sync to fetch the cover, then summarizes for confirmation before committing.
 ---
 
 # Add Record to Collection
 
 ## Overview
 
-The Obsidian vault is the single source of truth. Adding a record means: create a
-markdown note per record in the vault, run the sync script to regenerate
-`src/lib/vinyl-data.ts` and download cover art, then commit/push the repo changes — but
-only after the user confirms the summary.
+The Obsidian vault is the canonical source of truth. Adding a record means: create a
+markdown note per record in the vault when available, or in the repo-backed record
+inbox during cloud sessions, run the sync script to regenerate `src/lib/vinyl-data.ts`
+and download cover art, then commit the repo changes — but only after the user
+confirms the summary.
 
 A single message may request **multiple records** (e.g. "add the latest Big Thief and
 Jeff Tweedy albums"). Resolve and create a note for each, then sync once, confirm once,
@@ -20,6 +21,7 @@ and commit once.
 
 - Repo: `/Users/bradley/Projects/bradley.computer`
 - Vault Music folder: `/Users/bradley/Documents/Obsidian Vault/Music` (override with `VINYL_VAULT_DIR`)
+- Repo record inbox: `content/record-inbox` (override with `VINYL_INBOX_DIR`)
 - Note file: `<Album Title>.md` — the filename IS the album title shown on the site
 - Generated data: `src/lib/vinyl-data.ts` (auto-generated; never hand-edit)
 - Cover images: `public/vinyl/<slug>.jpg` (existing covers are never overwritten)
@@ -47,7 +49,7 @@ Copy this checklist and track progress:
 - [ ] 1. Parse the message into one or more records (artist, album)
 - [ ] 2. For each record: resolve on MusicBrainz (release-group MBID + full release date)
 - [ ] 3. Confirm any ambiguous matches
-- [ ] 4. For each record: create the vault note
+- [ ] 4. For each record: create the vault note, or an inbox note if the vault is unavailable
 - [ ] 5. Run npm run sync-vinyl once (it picks up every new note)
 - [ ] 6. Verify every cover + data entry
 - [ ] 7. Summarize all additions and ask for confirmation
@@ -107,11 +109,18 @@ If the artist or album match is uncertain (multiple plausible hits, low score, o
 inferred "latest"), state the chosen artist + album + year and ask the user to confirm
 before writing files.
 
-### 4. Create the vault note
+### 4. Create the record note
 
-Write `/Users/bradley/Documents/Obsidian Vault/Music/<Album Title>.md` with the frontmatter
-above. Use the canonical title as the filename verbatim (keep characters like `&`, `'`).
-If the note already exists, stop and tell the user instead of overwriting.
+Prefer the vault when it exists locally: write
+`/Users/bradley/Documents/Obsidian Vault/Music/<Album Title>.md` with the
+frontmatter above. Use the canonical title as the filename verbatim (keep
+characters like `&`, `'`). If the vault is unavailable in a cloud session, write
+`content/record-inbox/<Album Title>.md` instead. If either target note already
+exists, stop and tell the user instead of overwriting.
+
+Inbox notes are committed with the generated site changes. Later, on a local
+machine, run `npm run import-vinyl-inbox` to move them into Obsidian, then run
+`npm run sync-vinyl` and commit the inbox cleanup.
 
 ### 5. Run the sync
 
@@ -120,7 +129,10 @@ cd /Users/bradley/Projects/bradley.computer && npm run sync-vinyl
 ```
 
 This regenerates `src/lib/vinyl-data.ts` and downloads the cover to `public/vinyl/<slug>.jpg`
-using the pinned MusicBrainz release-group. Existing covers are kept.
+using the pinned MusicBrainz release-group. Existing covers are kept. If the
+Obsidian vault is unavailable but inbox notes exist, the script preserves existing
+records from the generated data and merges in the inbox notes for cloud-session
+updates.
 
 ### 6. Verify
 
@@ -138,22 +150,26 @@ without approval.
 
 ### 8. Commit and push (after approval)
 
-Stage only these records' changes — `src/lib/vinyl-data.ts` and the new cover(s) under
-`public/vinyl/` — and avoid unrelated working-tree changes. The vault notes live outside
-the repo (the source of truth) and are not committed.
+Stage only these records' changes — `src/lib/vinyl-data.ts`, the new cover(s) under
+`public/vinyl/`, and any new `content/record-inbox/*.md` note(s) created during a
+cloud session — and avoid unrelated working-tree changes. Local vault notes live
+outside the repo and are not committed.
 
 For a single record:
 
 ```bash
-git add src/lib/vinyl-data.ts public/vinyl/<slug>.jpg
+git add src/lib/vinyl-data.ts public/vinyl/<slug>.jpg content/record-inbox/<Album Title>.md
 git commit -m "Add <Artist> — <Album> to record collection"
 git push
 ```
 
-For multiple records, stage every new cover and use a summary message:
+Omit `content/record-inbox/<Album Title>.md` when the note was written directly to
+the local vault.
+
+For multiple records, stage every new cover/inbox note and use a summary message:
 
 ```bash
-git add src/lib/vinyl-data.ts public/vinyl/<slug-1>.jpg public/vinyl/<slug-2>.jpg
+git add src/lib/vinyl-data.ts public/vinyl/<slug-1>.jpg public/vinyl/<slug-2>.jpg content/record-inbox/<Album 1>.md content/record-inbox/<Album 2>.md
 git commit -m "Add 2 records to collection: <Album 1>, <Album 2>"
 git push
 ```
