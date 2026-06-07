@@ -21,7 +21,7 @@ export function VinylGrid({ records }: { records: VinylRecord[] }) {
               unoptimized={record.coverSrc.endsWith(".svg")}
             />
           </div>
-          <div className="mt-3 space-y-1">
+          <div className="mt-3">
             <p
               style={{
                 ...design.typography.caption,

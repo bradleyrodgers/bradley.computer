@@ -39,7 +39,6 @@ export function VinylCollection({ records }: { records: VinylRecord[] }) {
                   active ? "text-foreground" : "text-muted"
                 }`}
                 aria-pressed={active}
-                style={{ ...design.typography.caption, fontWeight: 500 }}
               >
                 {option.label}
               </button>
@@ -52,7 +51,6 @@ export function VinylCollection({ records }: { records: VinylRecord[] }) {
           onChange={(event) => setSort(event.target.value as SortKey)}
           className="cursor-pointer bg-transparent text-muted outline-none transition-colors hover:text-foreground"
           aria-label="Sort by"
-          style={{ ...design.typography.caption, fontWeight: 500 }}
         >
           {sortOptions.map((option) => (
             <option key={option.key} value={option.key}>
