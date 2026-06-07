@@ -31,23 +31,19 @@ and commit once.
 ---
 Artist: Kevin Morby
 Release Year: 2022
-Purchased Year: 2026
-Purchased Month: 6
-Purchased Day: 6
 MusicBrainz: https://musicbrainz.org/release-group/<uuid>
 ---
 ```
 
-- All fields are optional except `Artist`. Leave a field blank (key with empty value) when unknown.
+- Every field except `Artist` is optional. Leave a field blank (key with empty value) when unknown.
 - `MusicBrainz` should be a **release-group** URL — pin it so the sync fetches the correct cover.
-- Purchased date is partial-friendly: year only, year+month, or full date. A day without a month is ignored.
 
 ## Workflow
 
 Copy this checklist and track progress:
 
 ```
-- [ ] 1. Parse the message into one or more records (artist, album, purchase date)
+- [ ] 1. Parse the message into one or more records (artist, album)
 - [ ] 2. For each record: resolve on MusicBrainz (release-group MBID + release year)
 - [ ] 3. Confirm any ambiguous matches
 - [ ] 4. For each record: create the vault note
@@ -57,14 +53,12 @@ Copy this checklist and track progress:
 - [ ] 8. On approval: commit and push
 ```
 
-For multiple records, do steps 2–4 for each one (a shared purchase date like "yesterday"
-applies to all unless the user gives per-record dates), then continue with a single sync,
+For multiple records, do steps 2–4 for each one, then continue with a single sync,
 summary, and commit.
 
 ### 1. Parse the message
 
 - **Artist** and **album**. If the user says "the new/latest album" without a title, resolve the most recent studio album in step 2.
-- **Purchase date**: convert relative words against today's date. "today" → today; "yesterday" → today − 1; "last week" → roughly 7 days ago (month precision is fine); a month/season → year+month; nothing said → leave purchased fields blank.
 
 ### 2. Resolve on MusicBrainz
 
@@ -137,9 +131,9 @@ For every record added:
 
 ### 7. Summarize and confirm
 
-Present a short summary of every addition — artist, title, release year, purchase date,
-cover status (one line per record) — and ask the user to confirm before committing. Do not
-commit or push without approval.
+Present a short summary of every addition — artist, title, release year, cover status (one
+line per record) — and ask the user to confirm before committing. Do not commit or push
+without approval.
 
 ### 8. Commit and push (after approval)
 

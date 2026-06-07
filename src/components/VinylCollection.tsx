@@ -20,7 +20,7 @@ const views: { value: View; label: string }[] = [
 
 export function VinylCollection({ records }: { records: VinylRecord[] }) {
   const [view, setView] = useState<View>("grid");
-  const [sort, setSort] = useState<SortKey>("purchasedAt");
+  const [sort, setSort] = useState<SortKey>("releaseDate");
 
   const sorted = useMemo(() => sortRecords(records, sort), [records, sort]);
 

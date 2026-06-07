@@ -8,7 +8,7 @@
 // used to fetch cover art (which isn't stored in the vault).
 //
 // Frontmatter fields read from each note:
-//   Artist, Release Year, Purchased Year, Purchased Month, Purchased Day
+//   Artist, Release Year
 //   MusicBrainz (optional) — a release or release-group URL/MBID. When set, the
 //     exact release is used for cover art instead of a fuzzy title search.
 //
@@ -71,21 +71,6 @@ function parseFrontmatter(raw) {
     fields[key] = value === "" ? undefined : value;
   }
   return fields;
-}
-
-const pad = (n) => String(n).padStart(2, "0");
-
-// Purchase dates are intentionally optional and may be partial (memory gets
-// fuzzy further back). Emit the most precise partial ISO value available:
-// "", "2022", "2022-10", or "2022-10-15". A day without a month is ignored.
-function buildPurchasedAt(fields) {
-  const year = fields["Purchased Year"];
-  if (!year) return "";
-  const month = fields["Purchased Month"];
-  if (!month) return `${year}`;
-  const day = fields["Purchased Day"];
-  if (!day) return `${year}-${pad(Number(month))}`;
-  return `${year}-${pad(Number(month))}-${pad(Number(day))}`;
 }
 
 async function fileExists(p) {
@@ -225,7 +210,6 @@ function serializeRecords(records) {
         `    artist: ${JSON.stringify(r.artist)},`,
         `    title: ${JSON.stringify(r.title)},`,
         `    releaseDate: ${JSON.stringify(r.releaseDate)},`,
-        `    purchasedAt: ${JSON.stringify(r.purchasedAt)},`,
         `    coverSrc: ${JSON.stringify(r.coverSrc)},`,
         `    coverAlt: ${JSON.stringify(r.coverAlt)},`,
       ];
@@ -293,7 +277,6 @@ async function main() {
       artist,
       title,
       releaseDate: releaseYear,
-      purchasedAt: buildPurchasedAt(fields),
       coverSrc,
       coverAlt: `${title} by ${artist} album cover`,
     });
