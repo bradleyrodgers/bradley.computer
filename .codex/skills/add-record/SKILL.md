@@ -7,10 +7,14 @@ description: Add a record to the bradley.computer record collection from a natur
 
 ## Overview
 
-The Obsidian vault is the single source of truth. Adding a record means: create one
-markdown note in the vault, run the sync script to regenerate `src/lib/vinyl-data.ts`
-and download cover art, then commit/push the repo changes — but only after the user
-confirms the summary.
+The Obsidian vault is the single source of truth. Adding a record means: create a
+markdown note per record in the vault, run the sync script to regenerate
+`src/lib/vinyl-data.ts` and download cover art, then commit/push the repo changes — but
+only after the user confirms the summary.
+
+A single message may request **multiple records** (e.g. "add the latest Big Thief and
+Jeff Tweedy albums"). Resolve and create a note for each, then sync once, confirm once,
+and commit once.
 
 ## Paths
 
@@ -43,15 +47,19 @@ MusicBrainz: https://musicbrainz.org/release-group/<uuid>
 Copy this checklist and track progress:
 
 ```
-- [ ] 1. Parse the message (artist, album, purchase date)
-- [ ] 2. Resolve the album on MusicBrainz (release-group MBID + release year)
-- [ ] 3. Confirm the match if anything is ambiguous
-- [ ] 4. Create the vault note
-- [ ] 5. Run npm run sync-vinyl
-- [ ] 6. Verify cover + data entry
-- [ ] 7. Summarize and ask for confirmation
+- [ ] 1. Parse the message into one or more records (artist, album, purchase date)
+- [ ] 2. For each record: resolve on MusicBrainz (release-group MBID + release year)
+- [ ] 3. Confirm any ambiguous matches
+- [ ] 4. For each record: create the vault note
+- [ ] 5. Run npm run sync-vinyl once (it picks up every new note)
+- [ ] 6. Verify every cover + data entry
+- [ ] 7. Summarize all additions and ask for confirmation
 - [ ] 8. On approval: commit and push
 ```
+
+For multiple records, do steps 2–4 for each one (a shared purchase date like "yesterday"
+applies to all unless the user gives per-record dates), then continue with a single sync,
+summary, and commit.
 
 ### 1. Parse the message
 
@@ -121,25 +129,37 @@ using the pinned MusicBrainz release-group. Existing covers are kept.
 
 ### 6. Verify
 
-- Confirm the new record appears in `src/lib/vinyl-data.ts` with the expected `releaseDate`.
+For every record added:
+- Confirm it appears in `src/lib/vinyl-data.ts` with the expected `releaseDate`.
 - Confirm `coverSrc` is `/vinyl/<slug>.jpg`, not `/vinyl/placeholder.svg`. If it's the
   placeholder, the cover wasn't found — tell the user; they can drop a JPG at
   `public/vinyl/<slug>.jpg` manually and re-run the sync.
 
 ### 7. Summarize and confirm
 
-Present a short summary — artist, title, release year, purchase date, cover status — and
-ask the user to confirm before committing. Do not commit or push without approval.
+Present a short summary of every addition — artist, title, release year, purchase date,
+cover status (one line per record) — and ask the user to confirm before committing. Do not
+commit or push without approval.
 
 ### 8. Commit and push (after approval)
 
-Stage only this record's changes — `src/lib/vinyl-data.ts` and the new cover under
-`public/vinyl/` — and avoid unrelated working-tree changes. The vault note lives outside
-the repo (it's the source of truth) and is not committed.
+Stage only these records' changes — `src/lib/vinyl-data.ts` and the new cover(s) under
+`public/vinyl/` — and avoid unrelated working-tree changes. The vault notes live outside
+the repo (the source of truth) and are not committed.
+
+For a single record:
 
 ```bash
 git add src/lib/vinyl-data.ts public/vinyl/<slug>.jpg
 git commit -m "Add <Artist> — <Album> to record collection"
+git push
+```
+
+For multiple records, stage every new cover and use a summary message:
+
+```bash
+git add src/lib/vinyl-data.ts public/vinyl/<slug-1>.jpg public/vinyl/<slug-2>.jpg
+git commit -m "Add 2 records to collection: <Album 1>, <Album 2>"
 git push
 ```
 
