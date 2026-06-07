@@ -12,26 +12,26 @@ export function VinylList({ records }: { records: VinylRecord[] }) {
         return (
           <li
             key={record.id}
-            className="flex items-center gap-4 border-b py-4 first:border-t"
-            style={{ borderColor: design.colors.muted }}
+            className="flex items-center gap-3 border-b py-2 last:border-b-0"
+            style={{ borderColor: "rgba(184, 184, 180, 0.2)" }}
           >
             <div
-              className="relative h-14 w-14 shrink-0 overflow-hidden"
+              className="relative h-8 w-8 shrink-0 overflow-hidden"
               style={{ backgroundColor: design.colors.white }}
             >
               <Image
                 src={record.coverSrc}
                 alt={record.coverAlt}
                 fill
-                sizes="56px"
+                sizes="32px"
                 className="object-cover"
                 quality={90}
                 unoptimized={record.coverSrc.endsWith(".svg")}
               />
             </div>
-            <div className="min-w-0 flex-1">
+            <div className="flex min-w-0 flex-1 flex-col md:flex-row md:items-center md:gap-3">
               <p
-                className="truncate"
+                className="min-w-0 truncate md:flex-1"
                 style={{
                   ...design.typography.caption,
                   color: design.colors.foreground,
@@ -40,7 +40,7 @@ export function VinylList({ records }: { records: VinylRecord[] }) {
                 {record.artist}
               </p>
               <p
-                className="truncate"
+                className="min-w-0 truncate md:flex-1"
                 style={{
                   ...design.typography.caption,
                   color: design.colors.muted,

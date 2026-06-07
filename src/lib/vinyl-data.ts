@@ -34,7 +34,7 @@ export const records: VinylRecord[] = [
     id: "the-man-from-waco",
     artist: "Charley Crockett",
     title: "The Man from Waco",
-    releaseDate: "",
+    releaseDate: "2022",
     purchasedAt: "",
     coverSrc: "/vinyl/the-man-from-waco.jpg",
     coverAlt: "The Man from Waco by Charley Crockett album cover",
