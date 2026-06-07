@@ -20,6 +20,10 @@ export function VinylGrid({ records }: { records: VinylRecord[] }) {
               quality={90}
               unoptimized={record.coverSrc.endsWith(".svg")}
             />
+            <div
+              className="pointer-events-none absolute inset-0"
+              style={{ boxShadow: "inset 0 0 0 1px rgba(80, 79, 74, 0.12)" }}
+            />
           </div>
           <div className="mt-3">
             <p
