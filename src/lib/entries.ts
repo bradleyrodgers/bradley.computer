@@ -30,6 +30,15 @@ export type FeedEntry = ImageEntry | BandcampEntry | YouTubeEntry;
 /** Content from the Figma Desktop frame. */
 export const entries: FeedEntry[] = [
   {
+    type: "image",
+    id: "eric-schmidt-htsi",
+    imageSrc: "/entries/eric-schmidt-htsi.jpg",
+    imageAlt: "Eric Schmidt reading in a room with built-in bookshelves and a dog in the foreground",
+    title: "Eric Schmidt – HTSI",
+    titleHref: "https://www.ft.com/content/3446d9cf-ea9f-407a-a0a8-4be7fb7a7d54",
+    publishedAt: "2026-06-07T19:49:20+10:00",
+  },
+  {
     type: "youtube",
     id: "WgpKEMAfU_U",
     videoId: "WgpKEMAfU_U",
