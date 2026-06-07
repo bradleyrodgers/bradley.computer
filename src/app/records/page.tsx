@@ -4,8 +4,8 @@ import { design } from "@/lib/design";
 import { records } from "@/lib/vinyl";
 
 export const metadata: Metadata = {
-  title: "Vinyl Collection — Bradley Rodgers",
-  description: "A vinyl record collection by Bradley Rodgers.",
+  title: "Record Collection — Bradley Rodgers",
+  description: "A record collection by Bradley Rodgers.",
 };
 
 export default function VinylPage() {
@@ -35,7 +35,7 @@ export default function VinylPage() {
                 ...design.typography.subheader,
               }}
             >
-              Vinyl Collection
+              Record Collection
             </h2>
           </header>
           <VinylCollection records={records} />
