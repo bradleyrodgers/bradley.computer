@@ -4,6 +4,14 @@ import type { VinylRecord } from "./vinyl";
 
 export const records: VinylRecord[] = [
   {
+    id: "double-infinity",
+    artist: "Big Thief",
+    title: "Double Infinity",
+    releaseDate: "2025",
+    coverSrc: "/vinyl/double-infinity.jpg",
+    coverAlt: "Double Infinity by Big Thief album cover",
+  },
+  {
     id: "fenceline",
     artist: "Mildred",
     title: "Fenceline",
@@ -34,5 +42,13 @@ export const records: VinylRecord[] = [
     releaseDate: "2022",
     coverSrc: "/vinyl/the-man-from-waco.jpg",
     coverAlt: "The Man from Waco by Charley Crockett album cover",
+  },
+  {
+    id: "twilight-override",
+    artist: "Jeff Tweedy",
+    title: "Twilight Override",
+    releaseDate: "2025",
+    coverSrc: "/vinyl/twilight-override.jpg",
+    coverAlt: "Twilight Override by Jeff Tweedy album cover",
   },
 ];
