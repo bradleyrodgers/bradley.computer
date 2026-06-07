@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "sync-vinyl": "node scripts/sync-vinyl.mjs"
   },
   "dependencies": {
     "geist": "^1.7.0",
