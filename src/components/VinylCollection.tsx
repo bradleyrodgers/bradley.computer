@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { design } from "@/lib/design";
 import {
   type SortKey,
   type VinylRecord,

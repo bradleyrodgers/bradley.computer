@@ -2,7 +2,11 @@ export type VinylRecord = {
   id: string;
   artist: string;
   title: string;
-  /** Release year, e.g. "2022" (empty when unknown). */
+  /**
+   * Release date as an ISO string — full date preferred for ordering, e.g.
+   * "2022-10-21"; a bare year like "2022" is accepted. Empty when unknown.
+   * The UI displays only the year.
+   */
   releaseDate: string;
   label?: string;
   coverSrc: string;

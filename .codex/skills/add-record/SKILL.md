@@ -30,12 +30,13 @@ and commit once.
 ```markdown
 ---
 Artist: Kevin Morby
-Release Year: 2022
+Release Date: 2022-05-13
 MusicBrainz: https://musicbrainz.org/release-group/<uuid>
 ---
 ```
 
 - Every field except `Artist` is optional. Leave a field blank (key with empty value) when unknown.
+- `Release Date` is the full ISO date (the site displays only the year but orders by the full date). A bare year is accepted when that's all you have.
 - `MusicBrainz` should be a **release-group** URL — pin it so the sync fetches the correct cover.
 
 ## Workflow
@@ -44,7 +45,7 @@ Copy this checklist and track progress:
 
 ```
 - [ ] 1. Parse the message into one or more records (artist, album)
-- [ ] 2. For each record: resolve on MusicBrainz (release-group MBID + release year)
+- [ ] 2. For each record: resolve on MusicBrainz (release-group MBID + full release date)
 - [ ] 3. Confirm any ambiguous matches
 - [ ] 4. For each record: create the vault note
 - [ ] 5. Run npm run sync-vinyl once (it picks up every new note)
@@ -97,7 +98,7 @@ From the results, keep only `primary-type: "Album"` with **no** `secondary-types
 
 From the chosen release-group capture:
 - `id` → build `MusicBrainz: https://musicbrainz.org/release-group/<id>`
-- `first-release-date` → `Release Year` (first 4 chars)
+- `first-release-date` → `Release Date` (the full date, e.g. `2022-05-13`)
 - `title` → the album title (use this canonical casing for the filename)
 
 ### 3. Confirm ambiguity

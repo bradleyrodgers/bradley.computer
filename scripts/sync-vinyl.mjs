@@ -8,7 +8,7 @@
 // used to fetch cover art (which isn't stored in the vault).
 //
 // Frontmatter fields read from each note:
-//   Artist, Release Year
+//   Artist, Release Date (full ISO date preferred; "Release Year" also accepted)
 //   MusicBrainz (optional) — a release or release-group URL/MBID. When set, the
 //     exact release is used for cover art instead of a fuzzy title search.
 //
@@ -249,7 +249,11 @@ async function main() {
 
     console.log(`• ${title} — ${artist}`);
 
-    const releaseYear = fields["Release Year"] ? `${fields["Release Year"]}` : "";
+    // Full ISO date preferred for ordering; "Release Year" stays supported for
+    // notes that only record the year. The site displays just the year.
+    const releaseDate =
+      fields["Release Date"] ||
+      (fields["Release Year"] ? `${fields["Release Year"]}` : "");
 
     const fileName = `${slug}.jpg`;
     const destPath = path.join(PUBLIC_VINYL_DIR, fileName);
@@ -276,7 +280,7 @@ async function main() {
       id: slug,
       artist,
       title,
-      releaseDate: releaseYear,
+      releaseDate,
       coverSrc,
       coverAlt: `${title} by ${artist} album cover`,
     });
