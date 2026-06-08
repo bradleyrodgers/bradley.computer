@@ -12,6 +12,14 @@ export const records: VinylRecord[] = [
     coverAlt: "Double Infinity by Big Thief album cover",
   },
   {
+    id: "double-natural",
+    artist: "Boomgates",
+    title: "Double Natural",
+    releaseDate: "2012-08-31",
+    coverSrc: "/vinyl/double-natural.jpg",
+    coverAlt: "Double Natural by Boomgates album cover",
+  },
+  {
     id: "fenceline",
     artist: "Mildred",
     title: "Fenceline",
