@@ -32,6 +32,7 @@ export function VinylList({ records }: { records: VinylRecord[] }) {
             <div className="flex min-w-0 flex-1 flex-col md:flex-row md:items-center md:gap-3">
               <p
                 className="min-w-0 truncate md:flex-1"
+                title={record.artist}
                 style={{
                   ...design.typography.caption,
                   color: design.colors.foreground,
@@ -41,6 +42,7 @@ export function VinylList({ records }: { records: VinylRecord[] }) {
               </p>
               <p
                 className="min-w-0 truncate md:flex-1"
+                title={record.title}
                 style={{
                   ...design.typography.caption,
                   color: design.colors.muted,
@@ -50,7 +52,7 @@ export function VinylList({ records }: { records: VinylRecord[] }) {
               </p>
             </div>
             <p
-              className="shrink-0 tabular-nums"
+              className="shrink-0 whitespace-nowrap tabular-nums"
               style={{
                 ...design.typography.caption,
                 color: design.colors.muted,

@@ -6,7 +6,7 @@ export function VinylGrid({ records }: { records: VinylRecord[] }) {
   return (
     <ul className="grid grid-cols-2 gap-6 md:grid-cols-3">
       {records.map((record) => (
-        <li key={record.id}>
+        <li key={record.id} className="min-w-0">
           <div
             className="relative aspect-square w-full overflow-hidden"
             style={{ backgroundColor: design.colors.white }}
@@ -25,8 +25,10 @@ export function VinylGrid({ records }: { records: VinylRecord[] }) {
               style={{ boxShadow: "inset 0 0 0 1px rgba(80, 79, 74, 0.12)" }}
             />
           </div>
-          <div className="mt-3">
+          <div className="mt-3 min-w-0">
             <p
+              className="truncate"
+              title={record.title}
               style={{
                 ...design.typography.caption,
                 color: design.colors.foreground,
@@ -35,6 +37,8 @@ export function VinylGrid({ records }: { records: VinylRecord[] }) {
               {record.title}
             </p>
             <p
+              className="truncate"
+              title={record.artist}
               style={{
                 ...design.typography.caption,
                 color: design.colors.muted,
