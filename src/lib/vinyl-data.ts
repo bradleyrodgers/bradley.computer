@@ -4,19 +4,11 @@ import type { VinylRecord } from "./vinyl";
 
 export const records: VinylRecord[] = [
   {
-    id: "a-la-sala",
-    artist: "Khruangbin",
-    title: "A LA SALA",
-    releaseDate: "2024-04-05",
-    coverSrc: "/vinyl/a-la-sala.jpg",
-    coverAlt: "A LA SALA by Khruangbin album cover",
-  },
-  {
     id: "double-infinity",
     artist: "Big Thief",
     title: "Double Infinity",
     releaseDate: "2025-06-04",
-    coverSrc: "/vinyl/double-infinity.jpg",
+    coverSrc: "/vinyl/double-infinity.jpg?v=b9435770",
     coverAlt: "Double Infinity by Big Thief album cover",
   },
   {
@@ -24,7 +16,7 @@ export const records: VinylRecord[] = [
     artist: "Boomgates",
     title: "Double Natural",
     releaseDate: "2012-08-31",
-    coverSrc: "/vinyl/double-natural.jpg",
+    coverSrc: "/vinyl/double-natural.jpg?v=74c2cf5c",
     coverAlt: "Double Natural by Boomgates album cover",
   },
   {
@@ -32,7 +24,7 @@ export const records: VinylRecord[] = [
     artist: "Okonski",
     title: "Entrance Music",
     releaseDate: "2025-02-28",
-    coverSrc: "/vinyl/entrance-music.jpg",
+    coverSrc: "/vinyl/entrance-music.jpg?v=4fa6ff22",
     coverAlt: "Entrance Music by Okonski album cover",
   },
   {
@@ -40,7 +32,7 @@ export const records: VinylRecord[] = [
     artist: "Men I Trust",
     title: "Equus Asinus",
     releaseDate: "2025-03-19",
-    coverSrc: "/vinyl/equus-asinus.jpg",
+    coverSrc: "/vinyl/equus-asinus.jpg?v=57c67a39",
     coverAlt: "Equus Asinus by Men I Trust album cover",
   },
   {
@@ -48,23 +40,23 @@ export const records: VinylRecord[] = [
     artist: "Men I Trust",
     title: "Equus Caballus",
     releaseDate: "2025-05-06",
-    coverSrc: "/vinyl/equus-caballus.jpg",
+    coverSrc: "/vinyl/equus-caballus.jpg?v=bea3aef8",
     coverAlt: "Equus Caballus by Men I Trust album cover",
   },
   {
     id: "fall-out-of-the-future",
-    artist: "HEDGE BURNERS",
+    artist: "Hedge Burners",
     title: "Fall Out Of The Future",
     releaseDate: "2026-03-19",
-    coverSrc: "/vinyl/fall-out-of-the-future.jpg",
-    coverAlt: "Fall Out Of The Future by HEDGE BURNERS album cover",
+    coverSrc: "/vinyl/fall-out-of-the-future.jpg?v=3ccfb44d",
+    coverAlt: "Fall Out Of The Future by Hedge Burners album cover",
   },
   {
     id: "fenceline",
     artist: "Mildred",
     title: "Fenceline",
     releaseDate: "2026-04-24",
-    coverSrc: "/vinyl/fenceline.jpg",
+    coverSrc: "/vinyl/fenceline.jpg?v=bef4492d",
     coverAlt: "Fenceline by Mildred album cover",
   },
   {
@@ -72,7 +64,7 @@ export const records: VinylRecord[] = [
     artist: "Various Artists",
     title: "HELP(2)",
     releaseDate: "2026-03-06",
-    coverSrc: "/vinyl/help-2.jpg",
+    coverSrc: "/vinyl/help-2.jpg?v=207a8847",
     coverAlt: "HELP(2) by Various Artists album cover",
   },
   {
@@ -80,7 +72,7 @@ export const records: VinylRecord[] = [
     artist: "Cat Power",
     title: "Jukebox",
     releaseDate: "2008-01-18",
-    coverSrc: "/vinyl/jukebox.jpg",
+    coverSrc: "/vinyl/jukebox.jpg?v=41f82df6",
     coverAlt: "Jukebox by Cat Power album cover",
   },
   {
@@ -88,7 +80,7 @@ export const records: VinylRecord[] = [
     artist: "Okonski",
     title: "Magnolia",
     releaseDate: "2023-02-24",
-    coverSrc: "/vinyl/magnolia.jpg",
+    coverSrc: "/vinyl/magnolia.jpg?v=5a610093",
     coverAlt: "Magnolia by Okonski album cover",
   },
   {
@@ -96,7 +88,7 @@ export const records: VinylRecord[] = [
     artist: "Dick Diver",
     title: "New Start Again",
     releaseDate: "2011-10-14",
-    coverSrc: "/vinyl/new-start-again.jpg",
+    coverSrc: "/vinyl/new-start-again.jpg?v=a646c098",
     coverAlt: "New Start Again by Dick Diver album cover",
   },
   {
@@ -104,7 +96,7 @@ export const records: VinylRecord[] = [
     artist: "Vince Guaraldi",
     title: "Oh, Good Grief!",
     releaseDate: "1968",
-    coverSrc: "/vinyl/oh-good-grief.jpg",
+    coverSrc: "/vinyl/oh-good-grief.jpg?v=d3516b40",
     coverAlt: "Oh, Good Grief! by Vince Guaraldi album cover",
   },
   {
@@ -112,7 +104,7 @@ export const records: VinylRecord[] = [
     artist: "Daft Punk",
     title: "Random Access Memories",
     releaseDate: "2013-05-17",
-    coverSrc: "/vinyl/random-access-memories.jpg",
+    coverSrc: "/vinyl/random-access-memories.jpg?v=d1c7b52a",
     coverAlt: "Random Access Memories by Daft Punk album cover",
   },
   {
@@ -120,7 +112,7 @@ export const records: VinylRecord[] = [
     artist: "Widowspeak",
     title: "Roses",
     releaseDate: "2026-06-05",
-    coverSrc: "/vinyl/roses.jpg",
+    coverSrc: "/vinyl/roses.jpg?v=a772da9d",
     coverAlt: "Roses by Widowspeak album cover",
   },
   {
@@ -128,7 +120,7 @@ export const records: VinylRecord[] = [
     artist: "Alien Nosejob",
     title: "Stained Glass",
     releaseDate: "2022-11-25",
-    coverSrc: "/vinyl/stained-glass.jpg",
+    coverSrc: "/vinyl/stained-glass.jpg?v=dee467d4",
     coverAlt: "Stained Glass by Alien Nosejob album cover",
   },
   {
@@ -136,7 +128,7 @@ export const records: VinylRecord[] = [
     artist: "Olivia Dean",
     title: "The Art of Loving",
     releaseDate: "2025-09-26",
-    coverSrc: "/vinyl/the-art-of-loving.jpg",
+    coverSrc: "/vinyl/the-art-of-loving.jpg?v=0dcc4605",
     coverAlt: "The Art of Loving by Olivia Dean album cover",
   },
   {
@@ -144,7 +136,7 @@ export const records: VinylRecord[] = [
     artist: "Arctic Monkeys",
     title: "The Car",
     releaseDate: "2022-10-21",
-    coverSrc: "/vinyl/the-car.jpg",
+    coverSrc: "/vinyl/the-car.jpg?v=5ceac6eb",
     coverAlt: "The Car by Arctic Monkeys album cover",
   },
   {
@@ -152,7 +144,7 @@ export const records: VinylRecord[] = [
     artist: "Charley Crockett",
     title: "The Man from Waco",
     releaseDate: "2022-09-09",
-    coverSrc: "/vinyl/the-man-from-waco.jpg",
+    coverSrc: "/vinyl/the-man-from-waco.jpg?v=b422242e",
     coverAlt: "The Man from Waco by Charley Crockett album cover",
   },
   {
@@ -160,15 +152,23 @@ export const records: VinylRecord[] = [
     artist: "Max Richter",
     title: "The New Four Seasons - Vivaldi Recomposed",
     releaseDate: "2022-06-10",
-    coverSrc: "/vinyl/the-new-four-seasons-vivaldi-recomposed.jpg",
+    coverSrc: "/vinyl/the-new-four-seasons-vivaldi-recomposed.jpg?v=ca0ebfc9",
     coverAlt: "The New Four Seasons - Vivaldi Recomposed by Max Richter album cover",
+  },
+  {
+    id: "the-universe-smiles-upon-you-ii",
+    artist: "Khruangbin",
+    title: "The Universe Smiles Upon You II",
+    releaseDate: "2025-11-06",
+    coverSrc: "/vinyl/the-universe-smiles-upon-you-ii.jpg?v=4abba5ba",
+    coverAlt: "The Universe Smiles Upon You II by Khruangbin album cover",
   },
   {
     id: "twilight-override",
     artist: "Jeff Tweedy",
     title: "Twilight Override",
     releaseDate: "2025-09-26",
-    coverSrc: "/vinyl/twilight-override.jpg",
+    coverSrc: "/vinyl/twilight-override.jpg?v=95ff32fd",
     coverAlt: "Twilight Override by Jeff Tweedy album cover",
   },
   {
@@ -176,7 +176,7 @@ export const records: VinylRecord[] = [
     artist: "Bon Iver",
     title: "Volumes: One - Selections From Music Concerts 2019-2023 Bon Iver 6 Piece Band",
     releaseDate: "2026-04-03",
-    coverSrc: "/vinyl/volumes-one-selections-from-music-concerts-2019-2023-bon-iver-6-piece-band.jpg",
+    coverSrc: "/vinyl/volumes-one-selections-from-music-concerts-2019-2023-bon-iver-6-piece-band.jpg?v=75e05aa0",
     coverAlt: "Volumes: One - Selections From Music Concerts 2019-2023 Bon Iver 6 Piece Band by Bon Iver album cover",
   },
   {
@@ -184,7 +184,7 @@ export const records: VinylRecord[] = [
     artist: "Cat Power",
     title: "You Are Free",
     releaseDate: "2003-01-25",
-    coverSrc: "/vinyl/you-are-free.jpg",
+    coverSrc: "/vinyl/you-are-free.jpg?v=d2b4faf2",
     coverAlt: "You Are Free by Cat Power album cover",
   },
 ];

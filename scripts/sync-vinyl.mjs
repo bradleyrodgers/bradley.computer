@@ -18,6 +18,7 @@
 
 import { readFile, readdir, writeFile, access, mkdir } from "node:fs/promises";
 import { constants } from "node:fs";
+import { createHash } from "node:crypto";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import { homedir } from "node:os";
@@ -82,6 +83,15 @@ async function fileExists(p) {
   } catch {
     return false;
   }
+}
+
+// Short content hash used to cache-bust cover URLs. The filename stays stable
+// (e.g. double-infinity.jpg), so without this a replaced image keeps serving
+// stale bytes from the Next.js image cache and the browser. Appending ?v=<hash>
+// changes the URL only when the image content changes.
+async function contentVersion(p) {
+  const buf = await readFile(p);
+  return createHash("sha1").update(buf).digest("hex").slice(0, 8);
 }
 
 // Fetch JSON, falling back to curl when Node's fetch can't connect (some
@@ -277,6 +287,12 @@ async function main() {
       } else {
         console.log(`  - no cover found, using placeholder`);
       }
+    }
+
+    // Cache-bust by content so a replaced image (same filename) updates without
+    // a hard refresh. The placeholder is left unversioned.
+    if (coverSrc !== PLACEHOLDER) {
+      coverSrc = `${publicSrc}?v=${await contentVersion(destPath)}`;
     }
 
     records.push({
