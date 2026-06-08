@@ -59,4 +59,12 @@ export const records: VinylRecord[] = [
     coverSrc: "/vinyl/twilight-override.jpg",
     coverAlt: "Twilight Override by Jeff Tweedy album cover",
   },
+  {
+    id: "volumes-one-selections-from-music-concerts-2019-2023-bon-iver-6-piece-band",
+    artist: "Bon Iver",
+    title: "Volumes: One - Selections From Music Concerts 2019-2023 Bon Iver 6 Piece Band",
+    releaseDate: "2026-04-03",
+    coverSrc: "/vinyl/volumes-one-selections-from-music-concerts-2019-2023-bon-iver-6-piece-band.jpg",
+    coverAlt: "Volumes: One - Selections From Music Concerts 2019-2023 Bon Iver 6 Piece Band by Bon Iver album cover",
+  },
 ];

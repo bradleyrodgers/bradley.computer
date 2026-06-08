@@ -1,6 +1,6 @@
 ---
 name: add-journal-post
-description: Add posts to the bradley.computer audio visual journal. Use when the user asks to add, create, embed, or publish an image post, Instagram-sourced image, YouTube video, or other feed item on the local Next.js site at /Users/bradley/Projects/bradley.computer, especially with captions, attribution links, or requests to verify and push the journal update.
+description: Add posts to the bradley.computer audio visual journal. Use when the user asks to add, create, embed, or publish an image post, Instagram-sourced image, YouTube video, or other feed item on the local Next.js site at /Users/bradley/Development/bradley, especially with captions, attribution links, or requests to verify and push the journal update.
 ---
 
 # Add Journal Post
@@ -11,7 +11,7 @@ Use this skill to add new entries to the `bradley.computer` journal feed with th
 
 ## Repo Pattern
 
-- Repo: `/Users/bradley/Projects/bradley.computer`
+- Repo: `/Users/bradley/Development/bradley`
 - Entry data: `src/lib/entries.ts`
 - Image assets: `public/entries`
 - Image component: `src/components/ImageEntry.tsx`
@@ -25,7 +25,7 @@ Use `scripts/add_journal_post.py` from this skill folder when possible. In this 
 
 ```bash
 python3 .codex/skills/add-journal-post/scripts/add_journal_post.py image \
-  --repo /Users/bradley/Projects/bradley.computer \
+  --repo /Users/bradley/Development/bradley \
   --source "https://example.com/image.jpg" \
   --title "Caption" \
   --href "https://example.com/" \
@@ -34,7 +34,7 @@ python3 .codex/skills/add-journal-post/scripts/add_journal_post.py image \
 
 ```bash
 python3 .codex/skills/add-journal-post/scripts/add_journal_post.py youtube \
-  --repo /Users/bradley/Projects/bradley.computer \
+  --repo /Users/bradley/Development/bradley \
   --url "https://www.youtube.com/watch?v=WgpKEMAfU_U"
 ```
 

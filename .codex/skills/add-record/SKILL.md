@@ -18,9 +18,9 @@ and commit once.
 
 ## Paths
 
-- Repo: `/Users/bradley/Projects/bradley.computer`
-- Vault Music folder: `/Users/bradley/Documents/Obsidian Vault/Music` (override with `VINYL_VAULT_DIR`)
-- Note file: `<Album Title>.md` — the filename IS the album title shown on the site
+- Repo: `/Users/bradley/Development/bradley`
+- Vault Music folder: `~/Obsidian/Music` (override with `VINYL_VAULT_DIR`)
+- Note file: `<Album Title>.md` unless the title contains cross-device illegal filename characters (`\ / : * ? " < > |`); then use a safe filename. Always set `Title` frontmatter to the canonical title shown on the site.
 - Generated data: `src/lib/vinyl-data.ts` (auto-generated; never hand-edit)
 - Cover images: `public/vinyl/<slug>.jpg` (existing covers are never overwritten)
 - Public route: `/records`
@@ -30,12 +30,14 @@ and commit once.
 ```markdown
 ---
 Artist: Kevin Morby
+Title: This Is a Photograph
 Release Date: 2022-05-13
 MusicBrainz: https://musicbrainz.org/release-group/<uuid>
 ---
 ```
 
 - Every field except `Artist` is optional. Leave a field blank (key with empty value) when unknown.
+- Always set `Title` to the canonical display title, even when it matches the filename.
 - `Release Date` is the full ISO date (the site displays only the year but orders by the full date). A bare year is accepted when that's all you have.
 - `MusicBrainz` should be a **release-group** URL — pin it so the sync fetches the correct cover.
 
@@ -99,7 +101,7 @@ From the results, keep only `primary-type: "Album"` with **no** `secondary-types
 From the chosen release-group capture:
 - `id` → build `MusicBrainz: https://musicbrainz.org/release-group/<id>`
 - `first-release-date` → `Release Date` (the full date, e.g. `2022-05-13`)
-- `title` → the album title (use this canonical casing for the filename)
+- `title` → the album title (use this canonical casing for the display title)
 
 ### 3. Confirm ambiguity
 
@@ -109,14 +111,16 @@ before writing files.
 
 ### 4. Create the vault note
 
-Write `/Users/bradley/Documents/Obsidian Vault/Music/<Album Title>.md` with the frontmatter
-above. Use the canonical title as the filename verbatim (keep characters like `&`, `'`).
+Write `~/Obsidian/Music/<Album Title>.md` with the frontmatter
+above. Use the canonical title as the filename when it is portable. If it contains
+characters Obsidian Sync may reject across devices (`\ / : * ? " < > |`), replace those
+characters with `-` in the filename. Always set `Title` to the canonical title in frontmatter.
 If the note already exists, stop and tell the user instead of overwriting.
 
 ### 5. Run the sync
 
 ```bash
-cd /Users/bradley/Projects/bradley.computer && npm run sync-vinyl
+cd /Users/bradley/Development/bradley && npm run sync-vinyl
 ```
 
 This regenerates `src/lib/vinyl-data.ts` and downloads the cover to `public/vinyl/<slug>.jpg`

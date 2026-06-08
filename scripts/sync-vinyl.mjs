@@ -8,7 +8,8 @@
 // used to fetch cover art (which isn't stored in the vault).
 //
 // Frontmatter fields read from each note:
-//   Artist, Release Date (full ISO date preferred; "Release Year" also accepted)
+//   Artist, Title (optional; filename is used when absent),
+//   Release Date (full ISO date preferred; "Release Year" also accepted)
 //   MusicBrainz (optional) — a release or release-group URL/MBID. When set, the
 //     exact release is used for cover art instead of a fuzzy title search.
 //
@@ -19,6 +20,7 @@ import { readFile, readdir, writeFile, access, mkdir } from "node:fs/promises";
 import { constants } from "node:fs";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
+import { homedir } from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -29,7 +31,7 @@ const repoRoot = path.resolve(__dirname, "..");
 
 const VAULT_DIR =
   process.env.VINYL_VAULT_DIR ||
-  "/Users/bradley/Documents/Obsidian Vault/Music";
+  path.join(homedir(), "Obsidian", "Music");
 const PUBLIC_VINYL_DIR = path.join(repoRoot, "public", "vinyl");
 const DATA_FILE = path.join(repoRoot, "src", "lib", "vinyl-data.ts");
 const PLACEHOLDER = "/vinyl/placeholder.svg";
@@ -240,9 +242,10 @@ async function main() {
 
   const records = [];
   for (const file of files.sort()) {
-    const title = path.basename(file, ".md");
+    const fileTitle = path.basename(file, ".md");
     const raw = await readFile(path.join(VAULT_DIR, file), "utf8");
     const fields = parseFrontmatter(raw);
+    const title = fields["Title"] ?? fileTitle;
     const artist = fields["Artist"] ?? "Unknown Artist";
     const slug = slugify(title);
     const mbRef = parseMusicBrainzRef(fields["MusicBrainz"]);
