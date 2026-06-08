@@ -31,6 +31,15 @@ export type FeedEntry = ImageEntry | BandcampEntry | YouTubeEntry;
 export const entries: FeedEntry[] = [
   {
     type: "image",
+    id: "five-fits-with-tal-silberstein",
+    imageSrc: "/entries/five-fits-with-tal-silberstein.jpg",
+    imageAlt: "Tal Silberstein standing outside a storefront wearing a brown coat, white shirt, cream trousers, and tan shoes",
+    title: "Five Fits with Tal Silberstein",
+    titleHref: "https://christopherfenimore.substack.com/p/five-fits-with-tal-silberstein",
+    publishedAt: "2026-06-08T20:36:23+10:00",
+  },
+  {
+    type: "image",
     id: "eric-schmidt-htsi",
     imageSrc: "/entries/eric-schmidt-htsi.jpg",
     imageAlt: "Eric Schmidt reading in a room with built-in bookshelves and a dog in the foreground",
