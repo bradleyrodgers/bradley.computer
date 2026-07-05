@@ -124,6 +124,14 @@ export const records: VinylRecord[] = [
     coverAlt: "Stained Glass by Alien Nosejob album cover",
   },
   {
+    id: "station-model-violence",
+    artist: "Station Model Violence",
+    title: "Station Model Violence",
+    releaseDate: "2026-02-27",
+    coverSrc: "/vinyl/station-model-violence.jpg?v=d94a9e7b",
+    coverAlt: "Station Model Violence by Station Model Violence album cover",
+  },
+  {
     id: "the-art-of-loving",
     artist: "Olivia Dean",
     title: "The Art of Loving",
