@@ -30,6 +30,13 @@ export type FeedEntry = ImageEntry | BandcampEntry | YouTubeEntry;
 /** Content from the Figma Desktop frame. */
 export const entries: FeedEntry[] = [
   {
+    type: "youtube",
+    id: "JZMtOT-Tw8M",
+    videoId: "JZMtOT-Tw8M",
+    title: "Write DESIGNER",
+    publishedAt: "2026-07-15T03:51:54+00:00",
+  },
+  {
     type: "image",
     id: "twisted-teens-florida-water-blues",
     imageSrc: "/entries/twisted-teens-florida-water-blues.jpg",
