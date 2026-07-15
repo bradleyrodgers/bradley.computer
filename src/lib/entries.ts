@@ -22,6 +22,7 @@ export type YouTubeEntry = {
   id: string;
   videoId: string;
   title: string;
+  titleHref?: string;
   publishedAt: string;
 };
 
@@ -29,6 +30,14 @@ export type FeedEntry = ImageEntry | BandcampEntry | YouTubeEntry;
 
 /** Content from the Figma Desktop frame. */
 export const entries: FeedEntry[] = [
+  {
+    type: "youtube",
+    id: "JZMtOT-Tw8M",
+    videoId: "JZMtOT-Tw8M",
+    title: "Design Institute of Australia",
+    titleHref: "https://design.org.au/",
+    publishedAt: "2026-07-15T03:53:34+00:00",
+  },
   {
     type: "image",
     id: "twisted-teens-florida-water-blues",
