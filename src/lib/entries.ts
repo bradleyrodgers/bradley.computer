@@ -31,6 +31,15 @@ export type FeedEntry = ImageEntry | BandcampEntry | YouTubeEntry;
 /** Content from the Figma Desktop frame. */
 export const entries: FeedEntry[] = [
   {
+    type: "image",
+    id: "a-courtyard-house-by-office-mi-ji",
+    imageSrc: "/entries/a-courtyard-house-by-office-mi-ji.webp",
+    imageAlt: "A planted courtyard framed by pale brick walls, blue steel beams, timber-framed glazing, and an open kitchen",
+    title: "A Courtyard House by Office MI-JI",
+    titleHref: "https://mi-ji.com.au/projects/ACourtyardHouse",
+    publishedAt: "2026-07-22T04:02:45+00:00",
+  },
+  {
     type: "youtube",
     id: "JZMtOT-Tw8M",
     videoId: "JZMtOT-Tw8M",
