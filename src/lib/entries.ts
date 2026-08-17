@@ -31,6 +31,13 @@ export type FeedEntry = ImageEntry | BandcampEntry | YouTubeEntry;
 /** Content from the Figma Desktop frame. */
 export const entries: FeedEntry[] = [
   {
+    type: "youtube",
+    id: "JZMtOT-Tw8M",
+    videoId: "JZMtOT-Tw8M",
+    title: "Write DESIGNER",
+    publishedAt: "2026-07-15T03:51:54+00:00",
+  },
+  {
     type: "image",
     id: "the-standard-desk-lamp-by-parcta",
     imageSrc: "/entries/the-standard-desk-lamp-by-parcta.jpg",
