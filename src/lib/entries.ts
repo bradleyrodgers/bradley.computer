@@ -32,6 +32,15 @@ export type FeedEntry = ImageEntry | BandcampEntry | YouTubeEntry;
 export const entries: FeedEntry[] = [
   {
     type: "image",
+    id: "the-standard-desk-lamp-by-parcta",
+    imageSrc: "/entries/the-standard-desk-lamp-by-parcta.jpg",
+    imageAlt: "A lit aluminium desk lamp on a glass side table beside a book and round wooden coaster",
+    title: "The Standard Desk Lamp by Parcta",
+    titleHref: "https://www.parcta.com/products/the-standard-lamp-desk",
+    publishedAt: "2026-08-17T13:05:58+00:00",
+  },
+  {
+    type: "image",
     id: "a-courtyard-house-by-office-mi-ji",
     imageSrc: "/entries/a-courtyard-house-by-office-mi-ji.webp",
     imageAlt: "A planted courtyard framed by pale brick walls, blue steel beams, timber-framed glazing, and an open kitchen",
