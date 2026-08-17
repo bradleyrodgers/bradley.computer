@@ -19,6 +19,9 @@ Edit `src/lib/entries.ts`. Each entry has a `publishedAt` ISO datetime (time is 
 - **youtube** — embedded video (`videoId` from the watch URL)
 - **bandcamp** — embedded Bandcamp track (use the track ID from Bandcamp’s embed code)
 
+To create posts from an iPhone, configure the authenticated Cursor Cloud Agent
+endpoint and iOS Shortcut in [`docs/ios-journal-share.md`](docs/ios-journal-share.md).
+
 ## Deploy on Vercel
 
 1. Push this repo to GitHub.

@@ -1,4 +1,4 @@
 interface:
   display_name: "Add Journal Post"
-  short_description: "Add image and YouTube posts to bradley.computer."
-  default_prompt: "Add a new post to the bradley.computer journal feed."
+  short_description: "Add shared images, links, and embeds to the journal."
+  default_prompt: "Add the shared item to the bradley.computer journal feed."

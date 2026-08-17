@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Add image or YouTube posts to bradley.computer's journal feed."""
+"""Add image, YouTube, or Bandcamp posts to bradley.computer's journal feed."""
 
 from __future__ import annotations
 
@@ -168,20 +168,45 @@ def add_youtube(args: argparse.Namespace) -> None:
     title = args.title or fetch_youtube_title(url) or "YouTube video"
     post_id = args.id or video_id
 
+    lines = [
+        "  {",
+        '    type: "youtube",',
+        f"    id: {ts_string(post_id)},",
+        f"    videoId: {ts_string(video_id)},",
+        f"    title: {ts_string(title)},",
+    ]
+    if args.href:
+        lines.append(f"    titleHref: {ts_string(args.href)},")
+    lines.extend(
+        [
+            f"    publishedAt: {ts_string(args.published_at or current_timestamp())},",
+            "  },",
+        ]
+    )
+    entry = "\n".join(lines)
+    write_entry(repo, entry, post_id)
+    print(f"Added YouTube entry {post_id}")
+    print(f"Title: {title}")
+    print(f"Entries: {repo / 'src/lib/entries.ts'}")
+
+
+def add_bandcamp(args: argparse.Namespace) -> None:
+    repo = Path(args.repo).expanduser().resolve()
+    post_id = args.id or slugify(args.title)
     entry = "\n".join(
         [
             "  {",
-            '    type: "youtube",',
+            '    type: "bandcamp",',
             f"    id: {ts_string(post_id)},",
-            f"    videoId: {ts_string(video_id)},",
-            f"    title: {ts_string(title)},",
+            f"    trackId: {args.track_id},",
+            f"    title: {ts_string(args.title)},",
             f"    publishedAt: {ts_string(args.published_at or current_timestamp())},",
             "  },",
         ]
     )
     write_entry(repo, entry, post_id)
-    print(f"Added YouTube entry {post_id}")
-    print(f"Title: {title}")
+    print(f"Added Bandcamp entry {post_id}")
+    print(f"Title: {args.title}")
     print(f"Entries: {repo / 'src/lib/entries.ts'}")
 
 
@@ -205,9 +230,20 @@ def build_parser() -> argparse.ArgumentParser:
     youtube.add_argument("--url", help="YouTube URL")
     youtube.add_argument("--video-id", help="YouTube video ID")
     youtube.add_argument("--title", help="Optional title; fetched from oEmbed if omitted")
+    youtube.add_argument("--href", help="Optional caption/attribution link")
     youtube.add_argument("--id", help="Entry id; defaults to video ID")
     youtube.add_argument("--published-at", help="ISO timestamp")
     youtube.set_defaults(func=add_youtube)
+
+    bandcamp = subparsers.add_parser("bandcamp", help="Add a Bandcamp track post")
+    bandcamp.add_argument("--repo", default=".", help="Path to bradley.computer repo")
+    bandcamp.add_argument(
+        "--track-id", required=True, type=int, help="Numeric ID from Bandcamp embed code"
+    )
+    bandcamp.add_argument("--title", required=True, help="Track and artist title")
+    bandcamp.add_argument("--id", help="Entry id; defaults to a title slug")
+    bandcamp.add_argument("--published-at", help="ISO timestamp")
+    bandcamp.set_defaults(func=add_bandcamp)
     return parser
 
 
